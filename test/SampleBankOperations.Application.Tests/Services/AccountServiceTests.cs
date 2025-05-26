@@ -8,7 +8,7 @@ using SampleBankOperations.Core.Interfaces;
 
 namespace SampleBankOperations.Tests;
 
-public class AccountServiceTests
+public class AccountTests
 {
     private readonly Mock<IAccountService> _accountServiceMock;
     private readonly Mock<IAccountRepository> _accountRepositoryMock;
@@ -16,7 +16,7 @@ public class AccountServiceTests
     private readonly BankOperations _bankOperations;
     private readonly Faker _faker;
 
-    public AccountServiceTests()
+    public AccountTests()
     {
         _accountServiceMock = new Mock<IAccountService>();
         _accountRepositoryMock = new Mock<IAccountRepository>();
