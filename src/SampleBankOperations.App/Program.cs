@@ -8,8 +8,14 @@ using SampleBankOperations.Core.Interfaces;
 using SampleBankOperations.Infrastructure.Logging;
 using SampleBankOperations.Infrastructure.Persistence;
 using SampleBankOperations.Infrastructure.Persistence.Repositories;
+using System.Diagnostics.CodeAnalysis;
 
-var serviceProvider = new ServiceCollection()
+[ExcludeFromCodeCoverage]
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        var serviceProvider = new ServiceCollection()
     .AddSingleton<ILogger, Logger>()
     .AddSingleton<BankingDbContext>()
     .AddScoped<IAccountRepository, AccountRepository>()
@@ -18,5 +24,7 @@ var serviceProvider = new ServiceCollection()
     .AddTransient<UserInterface>()
     .BuildServiceProvider();
 
-var userInterface = serviceProvider.GetService<UserInterface>();
-userInterface?.Run();
+        var userInterface = serviceProvider.GetService<UserInterface>();
+        userInterface?.Run();
+    }
+}

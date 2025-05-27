@@ -1,177 +1,141 @@
-﻿using Bogus;
-using FluentAssertions;
-using Moq;
-using SampleBankOperations.App.Services.Operations;
-using SampleBankOperations.Application.Interfaces;
+﻿using Moq;
+using SampleBankOperations.Application.Services;
 using SampleBankOperations.Core.Entities;
+using SampleBankOperations.Core.Enums;
 using SampleBankOperations.Core.Interfaces;
+using System;
 using Xunit;
 
-namespace SampleBankOperations.Application.Tests.Application.Services;
+namespace SampleBankOperations.Tests;
 
 public class AccountServiceTests
 {
-    private readonly Mock<IAccountService> _accountServiceMock;
-    private readonly Mock<IAccountRepository> _accountRepositoryMock;
+    private readonly Mock<IAccountRepository> _accountRepoMock;
     private readonly Mock<ILogger> _loggerMock;
-    private readonly BankOperations _bankOperations;
-    private readonly Faker _faker;
+    private readonly AccountService _accountService;
 
     public AccountServiceTests()
     {
-        _accountServiceMock = new Mock<IAccountService>();
-        _accountRepositoryMock = new Mock<IAccountRepository>();
+        _accountRepoMock = new Mock<IAccountRepository>();
         _loggerMock = new Mock<ILogger>();
-        _bankOperations = new BankOperations(_accountServiceMock.Object, _accountRepositoryMock.Object, _loggerMock.Object);
-        _faker = new Faker();
+        _accountService = new AccountService(_accountRepoMock.Object, _loggerMock.Object);
     }
 
     [Fact]
-    public void GetAccountByNumber_ShouldReturnAccount_WhenAccountExists()
+    public void CalculateInterest_ReturnsCorrectInterest()
     {
-        // Arrange
-        var accountNumber = _faker.Finance.Account();
-        var expectedAccount = new Account(accountNumber, 100, Core.Enums.AccountType.Checking);
+        var account = new Account("123", 1000m, AccountType.Checking);
+        decimal rate = 0.05m;
 
-        _accountRepositoryMock.Setup(r => r.GetByAccountNumber(accountNumber))
-            .Returns(expectedAccount);
+        var result = _accountService.CalculateInterest(account, (balance, r) => balance * r, rate);
 
-        // Act
-        var result = _bankOperations.GetAccountByNumber(accountNumber);
-
-        // Assert
-        result.Should().Be(expectedAccount);
+        Assert.Equal(50m, result);
+        _loggerMock.Verify(l => l.Log(It.Is<string>(s => s.Contains("Calculated interest"))), Times.Once);
     }
 
-    [Theory]
-    [InlineData(500, 100)]
-    [InlineData(1000, 50)]
-    public void ViewBalance_ShouldOutputCorrectBalance_WhenAccountIsValid(decimal initialBalance, decimal expectedBalance)
+    [Fact]
+    public void Deposit_UpdatesAccount_LogsAndInvokesCallback()
     {
-        // Arrange
-        var account = new Account(_faker.Finance.Account(), initialBalance, Core.Enums.AccountType.Checking);
-        _accountServiceMock.Setup(s => s.GetBalance(account)).Returns(expectedBalance);
+        var account = new Account("123", 100m, AccountType.Savings);
+        decimal amount = 200m;
+        bool callbackCalled = false;
 
-        using var sw = new StringWriter();
-        Console.SetOut(sw);
+        _accountService.Deposit(account, amount, _ => callbackCalled = true);
 
-        // Act
-        _bankOperations.ViewBalance(account);
-
-        // Assert
-        var output = sw.ToString().Trim();
-        output.Should().Contain($"Saldo atual da conta {account.AccountNumber}:");
-        output.Should().Contain($"{expectedBalance:C}");
+        Assert.Equal(300m, account.Balance);
+        Assert.True(callbackCalled);
+        _accountRepoMock.Verify(r => r.Update(account), Times.Once);
+        _loggerMock.Verify(l => l.Log(It.Is<string>(s => s.Contains("Deposited"))), Times.Once);
     }
 
-    [Theory]
-    [InlineData(200)]
-    [InlineData(123.45)]
-    public void Deposit_ShouldCallServiceAndOutputAmount_WhenInputIsValid(decimal depositAmount)
+    [Fact]
+    public void Withdraw_WhenAllowedAndSufficientBalance_ReturnsTrue()
     {
-        // Arrange
-        var account = new Account(_faker.Finance.Account(), 0, Core.Enums.AccountType.Checking);
+        var account = new Account("123", 500m, AccountType.Savings);
+        decimal amount = 200m;
 
-        using var sr = new StringReader(depositAmount.ToString());
-        Console.SetIn(sr);
-        using var sw = new StringWriter();
-        Console.SetOut(sw);
+        bool result = _accountService.Withdraw(account, amount, bal => bal >= amount);
 
-        _accountServiceMock.Setup(s => s.Deposit(account, depositAmount, It.IsAny<Action<decimal>>()))
-            .Callback<Account, decimal, Action<decimal>>((_, amt, callback) => callback(amt));
-
-        // Act
-        _bankOperations.Deposit(account);
-
-        // Assert
-        var output = sw.ToString().Trim();
-        output.Should().Contain($"Depositado: {depositAmount:C}");
+        Assert.True(result);
+        Assert.Equal(300m, account.Balance);
+        _accountRepoMock.Verify(r => r.Update(account), Times.Once);
+        _loggerMock.Verify(l => l.Log(It.Is<string>(s => s.Contains("Withdraw:"))), Times.Once);
     }
 
-    [Theory]
-    [InlineData(100, true)]
-    [InlineData(9999, false)]
-    public void Withdraw_ShouldReturnExpectedResult_BasedOnBalance(decimal amount, bool expectedSuccess)
+    [Fact]
+    public void Withdraw_WhenNotAllowed_ReturnsFalse()
     {
-        // Arrange
-        var account = new Account(_faker.Finance.Account(), 1000, Core.Enums.AccountType.Checking);
+        var account = new Account("123", 100m, AccountType.Checking);
+        decimal amount = 200m;
 
-        using var sr = new StringReader(amount.ToString());
-        Console.SetIn(sr);
-        using var sw = new StringWriter();
-        Console.SetOut(sw);
+        bool result = _accountService.Withdraw(account, amount, bal => bal >= amount);
 
-        _accountServiceMock
-            .Setup(s => s.Withdraw(account, amount, It.IsAny<Predicate<decimal>>()
-))
-            .Returns(expectedSuccess);
-
-        // Act
-        _bankOperations.Withdraw(account);
-
-        // Assert
-        var output = sw.ToString().Trim();
-        if (expectedSuccess)
-            output.Should().Contain($"Sacado: {amount:C}");
-        else
-            output.Should().Contain("Saldo insuficiente.");
+        Assert.False(result);
+        Assert.Equal(100m, account.Balance);
+        _loggerMock.Verify(l => l.Log(It.Is<string>(s => s.Contains("Failed to withdraw"))), Times.Once);
     }
 
-    [Theory]
-    [InlineData(300, true)]
-    [InlineData(9999, false)]
-    public void Transfer_ShouldDisplayMessage_BasedOnTransferSuccess(decimal transferAmount, bool success)
+    [Fact]
+    public void GetBalance_ReturnsBalance_WhenAccountExists()
     {
-        // Arrange
-        var from = new Account(_faker.Finance.Account(), 1000, Core.Enums.AccountType.Checking);
-        var to = new Account(_faker.Finance.Account(), 0, Core.Enums.AccountType.Checking);
+        var account = new Account("123", 0m, AccountType.Checking);
+        var stored = new Account("123", 600m, AccountType.Checking);
+        typeof(Account).GetProperty("AccountId")!.SetValue(stored, account.AccountId); // to match IDs
+        _accountRepoMock.Setup(r => r.GetById(account.AccountId)).Returns(stored);
 
-        using var sr = new StringReader(transferAmount.ToString());
-        Console.SetIn(sr);
-        using var sw = new StringWriter();
-        Console.SetOut(sw);
+        var result = _accountService.GetBalance(account);
 
-        _accountServiceMock.Setup(s =>
-            s.Transfer(from, to, transferAmount,
-                It.IsAny<Predicate<decimal>>(),
-                It.IsAny<Predicate<decimal>>()
-))
-            .Returns(success);
-
-        // Act
-        _bankOperations.Transfer(from, to);
-
-        // Assert
-        var output = sw.ToString().Trim();
-        if (success)
-            output.Should().Contain($"Transferido: {transferAmount:C} da conta {from.AccountNumber} para {to.AccountNumber}");
-        else
-            output.Should().Contain("Falha na transferência por saldo insuficiente.");
+        Assert.Equal(600m, result);
+        _loggerMock.Verify(l => l.Log(It.Is<string>(s => s.Contains("Checked balance"))), Times.Once);
     }
 
-    [Theory]
-    [InlineData(1000, 1.5)]
-    [InlineData(500, 10)]
-    public void CalculateInterest_ShouldOutputCorrectAmount_WhenRateIsValid(decimal balance, decimal rate)
+    [Fact]
+    public void GetBalance_ReturnsZero_WhenAccountDoesNotExist()
     {
-        // Arrange
-        var account = new Account(_faker.Finance.Account(), balance, Core.Enums.AccountType.Checking);
-        var expectedInterest = balance * (rate / 100);
+        var account = new Account("123", 0m, AccountType.Savings);
+        _accountRepoMock.Setup(r => r.GetById(account.AccountId)).Returns((Account)null);
 
-        using var sr = new StringReader(rate.ToString());
-        Console.SetIn(sr);
-        using var sw = new StringWriter();
-        Console.SetOut(sw);
+        var result = _accountService.GetBalance(account);
 
-        _accountServiceMock
-            .Setup(s => s.CalculateInterest(account, It.IsAny<Func<decimal, decimal, decimal>>(), rate))
-            .Returns(expectedInterest);
+        Assert.Equal(0, result);
+        _loggerMock.Verify(l => l.Log(It.Is<string>(s => s.Contains("not found"))), Times.Once);
+    }
 
-        // Act
-        _bankOperations.CalculateInterest(account);
+    [Fact]
+    public void Transfer_WhenValid_PerformsTransferAndReturnsTrue()
+    {
+        var from = new Account("1", 1000m, AccountType.Savings);
+        var to = new Account("2", 500m, AccountType.Checking);
 
-        // Assert
-        var output = sw.ToString().Trim();
-        output.Should().Contain($"Juros calculado: {expectedInterest:C}");
+        _accountRepoMock.Setup(r => r.GetById(from.AccountId)).Returns(from);
+        _accountRepoMock.Setup(r => r.GetById(to.AccountId)).Returns(to);
+
+        bool result = _accountService.Transfer(
+            from, to, 200m,
+            bal => bal >= 200m,
+            bal => true
+        );
+
+        Assert.True(result);
+        Assert.Equal(800m, from.Balance);
+        Assert.Equal(700m, to.Balance);
+    }
+
+    [Fact]
+    public void Transfer_WhenInsufficientBalance_ReturnsFalse()
+    {
+        var from = new Account("1", 100m, AccountType.Savings);
+        var to = new Account("2", 500m, AccountType.Checking);
+
+        _accountRepoMock.Setup(r => r.GetById(from.AccountId)).Returns(from);
+        _accountRepoMock.Setup(r => r.GetById(to.AccountId)).Returns(to);
+
+        var result = _accountService.Transfer(
+            from, to, 200m,
+            bal => bal >= 200m,
+            bal => true
+        );
+
+        Assert.False(result);
     }
 }
