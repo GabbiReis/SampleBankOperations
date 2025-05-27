@@ -214,13 +214,13 @@ var assemblies = [
     "name": "SampleBankOperations.App",
     "classes": [
       { "name": "Program", "rp": "SampleBankOperations.App_Program.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 22, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "SampleBankOperations.App.Services.Operations.BankOperations", "rp": "SampleBankOperations.App_BankOperations.html", "cl": 46, "ucl": 26, "cal": 72, "tl": 107, "cb": 8, "tb": 14, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "SampleBankOperations.App.Services.Operations.BankOperations", "rp": "SampleBankOperations.App_BankOperations.html", "cl": 48, "ucl": 26, "cal": 74, "tl": 110, "cb": 8, "tb": 14, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "SampleBankOperations.App.Services.UI.UserInterface", "rp": "SampleBankOperations.App_UserInterface.html", "cl": 0, "ucl": 65, "cal": 65, "tl": 94, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
   {
     "name": "SampleBankOperations.Application",
     "classes": [
-      { "name": "SampleBankOperations.Application.DTOs.AccountDTO", "rp": "SampleBankOperations.Application_AccountDTO.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 8, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "SampleBankOperations.Application.DTOs.AccountDTO", "rp": "SampleBankOperations.Application_AccountDTO.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 8, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "SampleBankOperations.Application.Services.AccountService", "rp": "SampleBankOperations.Application_AccountService.html", "cl": 0, "ucl": 47, "cal": 47, "tl": 79, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "SampleBankOperations.Application.Services.Helpers.TransferHelper", "rp": "SampleBankOperations.Application_TransferHelper.html", "cl": 25, "ucl": 0, "cal": 25, "tl": 46, "cb": 6, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "SampleBankOperations.Application.Validations.AccountValidator", "rp": "SampleBankOperations.Application_AccountValidator.html", "cl": 6, "ucl": 0, "cal": 6, "tl": 14, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },

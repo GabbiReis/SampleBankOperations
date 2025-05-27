@@ -79,10 +79,13 @@ public class BankOperations : IBankOperations
         Console.Write("Informe o valor para transferência: ");
         if (decimal.TryParse(Console.ReadLine(), out var amount))
         {
-            bool success = _accountService.Transfer(fromAccount, toAccount, amount,
-                AccountValidator.MinimumBalanceValidator(0), AccountValidator.RequestedAmountValidator(amount));
+            var minBalanceValidator = new Predicate<decimal>(AccountValidator.MinimumBalanceValidator(0));
+            var requestedAmountValidator = new Predicate<decimal>(AccountValidator.RequestedAmountValidator(amount));
 
-            Console.WriteLine(success ? $"Transferido: {amount:C} da conta {fromAccount.AccountNumber} para {toAccount.AccountNumber}"
+            bool success = _accountService.Transfer(fromAccount, toAccount, amount, minBalanceValidator, requestedAmountValidator);
+
+            Console.WriteLine(success
+                ? $"Transferido: {amount:C} da conta {fromAccount.AccountNumber} para {toAccount.AccountNumber}"
                 : "Falha na transferência por saldo insuficiente.");
         }
         else

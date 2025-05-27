@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "gvCqHlbSpI8=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\gabri\\SampleBankOperations\\src\\SampleBankOperations.App\\SampleBankOperations.App.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.1\\microsoft.extensions.dependencyinjection.9.0.1.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.1\\microsoft.extensions.dependencyinjection.abstractions.9.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,16 @@
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\bin\Debug\net9.0\SampleBankOperations.Application.deps.json
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\bin\Debug\net9.0\SampleBankOperations.Application.dll
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\bin\Debug\net9.0\SampleBankOperations.Application.pdb
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\bin\Debug\net9.0\SampleBankOperations.Core.dll
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\bin\Debug\net9.0\SampleBankOperations.Core.pdb
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\obj\Debug\net9.0\SampleBankOperations.Application.csproj.AssemblyReference.cache
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\obj\Debug\net9.0\SampleBankOperations.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\obj\Debug\net9.0\SampleBankOperations.Application.AssemblyInfoInputs.cache
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\obj\Debug\net9.0\SampleBankOperations.Application.AssemblyInfo.cs
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\obj\Debug\net9.0\SampleBankOperations.Application.csproj.CoreCompileInputs.cache
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\obj\Debug\net9.0\SampleBankOperations.Application.sourcelink.json
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\obj\Debug\net9.0\SampleBa.85667687.Up2Date
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\obj\Debug\net9.0\SampleBankOperations.Application.dll
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\obj\Debug\net9.0\refint\SampleBankOperations.Application.dll
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\obj\Debug\net9.0\SampleBankOperations.Application.pdb
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Application\obj\Debug\net9.0\ref\SampleBankOperations.Application.dll

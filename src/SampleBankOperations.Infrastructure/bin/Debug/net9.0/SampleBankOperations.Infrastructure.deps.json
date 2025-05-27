@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "SampleBankOperations.Infrastructure/1.0.0": {
+        "dependencies": {
+          "SampleBankOperations.Core": "1.0.0"
+        },
+        "runtime": {
+          "SampleBankOperations.Infrastructure.dll": {}
+        }
+      },
+      "SampleBankOperations.Core/1.0.0": {
+        "runtime": {
+          "SampleBankOperations.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SampleBankOperations.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SampleBankOperations.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

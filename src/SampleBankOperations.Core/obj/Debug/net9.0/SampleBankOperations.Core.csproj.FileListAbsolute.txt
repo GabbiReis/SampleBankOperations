@@ -1,0 +1,12 @@
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\bin\Debug\net9.0\SampleBankOperations.Core.deps.json
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\bin\Debug\net9.0\SampleBankOperations.Core.dll
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\bin\Debug\net9.0\SampleBankOperations.Core.pdb
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\obj\Debug\net9.0\SampleBankOperations.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\obj\Debug\net9.0\SampleBankOperations.Core.AssemblyInfoInputs.cache
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\obj\Debug\net9.0\SampleBankOperations.Core.AssemblyInfo.cs
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\obj\Debug\net9.0\SampleBankOperations.Core.csproj.CoreCompileInputs.cache
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\obj\Debug\net9.0\SampleBankOperations.Core.sourcelink.json
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\obj\Debug\net9.0\SampleBankOperations.Core.dll
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\obj\Debug\net9.0\refint\SampleBankOperations.Core.dll
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\obj\Debug\net9.0\SampleBankOperations.Core.pdb
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Core\obj\Debug\net9.0\ref\SampleBankOperations.Core.dll

@@ -1,0 +1,16 @@
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\bin\Debug\net9.0\SampleBankOperations.Infrastructure.deps.json
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\bin\Debug\net9.0\SampleBankOperations.Infrastructure.dll
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\bin\Debug\net9.0\SampleBankOperations.Infrastructure.pdb
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\bin\Debug\net9.0\SampleBankOperations.Core.dll
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\bin\Debug\net9.0\SampleBankOperations.Core.pdb
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\obj\Debug\net9.0\SampleBankOperations.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\obj\Debug\net9.0\SampleBankOperations.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\obj\Debug\net9.0\SampleBankOperations.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\obj\Debug\net9.0\SampleBankOperations.Infrastructure.AssemblyInfo.cs
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\obj\Debug\net9.0\SampleBankOperations.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\obj\Debug\net9.0\SampleBankOperations.Infrastructure.sourcelink.json
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\obj\Debug\net9.0\SampleBa.E36AD752.Up2Date
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\obj\Debug\net9.0\SampleBankOperations.Infrastructure.dll
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\obj\Debug\net9.0\refint\SampleBankOperations.Infrastructure.dll
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\obj\Debug\net9.0\SampleBankOperations.Infrastructure.pdb
+C:\Users\gabri\SampleBankOperations\src\SampleBankOperations.Infrastructure\obj\Debug\net9.0\ref\SampleBankOperations.Infrastructure.dll
